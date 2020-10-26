@@ -1,0 +1,108 @@
+<template>
+    <lightning-card title="Project Management">
+        <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+            <lightning-progress-step label="Create a project" value="1"></lightning-progress-step>
+            <lightning-progress-step label="Create Module" value="2"></lightning-progress-step>
+            <lightning-progress-step label="Create Task" value="3"></lightning-progress-step>
+            <lightning-progress-step label="Assign user" value="4"></lightning-progress-step>
+            <lightning-progress-step label="Closed" value="5"></lightning-progress-step>
+        </lightning-progress-indicator>
+        
+        <lightning-layout>
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-card title="Create A New Project">
+                    <lightning-record-edit-form object-api-name="Project__c" onsuccess={successHandler}>
+                        <div class="stepOne">
+                            <p>
+                                <lightning-input-field field-name='Name'></lightning-input-field>
+                            </p>
+                            <p>
+                                <lightning-input-field field-name='Category__c'></lightning-input-field>
+                            </p>
+                            <p>
+                                <lightning-input-field field-name='Status__c'></lightning-input-field>
+                            </p>
+                            <p>
+                                <lightning-input-field field-name='Start_Date__c'></lightning-input-field>
+                            </p>
+
+                            <p>
+                                <lightning-input-field field-name='Duration__c'></lightning-input-field>
+                            </p>
+                            <p>
+                                <lightning-input-field field-name='Stage__c'></lightning-input-field>
+                            </p>
+                            <p>
+                                <lightning-input-field field-name='Company__c'></lightning-input-field>
+                            </p>
+                            
+                            <p>
+                                <lightning-button type="submit" variant="brand" name="save" label="Create Project"
+                                    onclick={goToStepTwo}>
+                                </lightning-button>
+                            </p>
+                        </div>
+                       
+                        <div class="stepTwo slds-hide">
+                            <lightning-input-field field-name="Duration__c">
+                            </lightning-input-field>
+                            <lightning-button class="slds-var-m-top_small" label="Previous" onclick={goBackToStepOne}>
+                            </lightning-button>
+                            <lightning-button class="slds-var-m-top_small" label="Next" onclick={goToStepThree}>
+                            </lightning-button>
+                        </div>
+                        <div class="stepThree slds-hide">
+                            <lightning-input-field field-name="Duration__c">
+                            </lightning-input-field>
+                            <lightning-button class="slds-var-m-top_small" label="Previous" onclick={goBackToStepTwo}>
+                            </lightning-button>
+                            <lightning-button class="slds-var-m-top_small" label="Next" onclick={goToStepFour}>
+                            </lightning-button>
+                        </div>
+                        <div class="stepFour slds-hide">
+                            <lightning-input-field field-name="Start_Date__c" type="Date"> </lightning-input-field>
+                            <lightning-button class="slds-var-m-top_small" label="Previous" onclick={goBackToStepThree}>
+                            </lightning-button>
+                            <lightning-button class="slds-var-m-top_small" label="Next" onclick={goToStepFive}>
+                            </lightning-button>
+                        </div>
+                        <div class="stepFive slds-hide">
+                            <lightning-input-field field-name="Stage__c" type="Picklist"> </lightning-input-field>
+                            <lightning-button class="slds-var-m-top_small" label="Previous" onclick={goBackToStepFour}>
+                            </lightning-button>
+                            <lightning-button class="slds-var-m-top_small" label="Save" type="submit"
+                                onclick={handleSave}>
+                            </lightning-button>
+                        </div>
+                        
+
+                    </lightning-record-edit-form>
+                </lightning-card>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout>
+
+            <lightning-layout-item size="12" padding="around-small">
+            
+                <lightning-card title="Search Project" icon-name="custom:custom63">
+                    <div class="slds-var-m-around_medium">
+                        <lightning-input type="search" onchange={handleKeyChange} class="slds-var-m-bottom_small"
+                            label="Search">
+                        </lightning-input>
+                        <template if:true={Project__c}>
+                            <div style="height: 300px;">
+                                <lightning-datatable key-field="Id" data={Project__c} columns={columns}
+                                    hide-checkbox-column="true" show-row-number-column="true" onsave={handleSave}
+                                    draft-values={draftValues} onrowaction={handleRowAction}>
+                                </lightning-datatable>
+                            </div>
+                        </template>
+                        <template if:true={error}>
+                            {error}>
+                        </template>
+                    </div>
+                </lightning-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

@@ -1,0 +1,37 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+            Edit Task
+        </h3>
+        <div slot="footer">
+                
+        </div>
+        <div>
+            <lightning-record-edit-form record-id={recordId} object-api-name={objectApiName} onsuccess={handleSuccess} onerror={handleError}>
+            <lightning-input-field field-name="Name" disabled={readOnly}>
+            </lightning-input-field>
+            <lightning-input-field field-name="Status__c">
+            </lightning-input-field>
+            <lightning-input-field field-name="Start_Date__c" disabled={readOnly}>
+            </lightning-input-field>
+            <lightning-input-field field-name="End_Date__c" disabled={readOnly}>
+            </lightning-input-field>
+            <lightning-input-field field-name="Module__c" disabled={readOnly}>
+            </lightning-input-field>
+            <template if:true={readOnly}>
+                <lightning-input-field field-name="Actual_End_Date__c"></lightning-input-field>
+            </template>
+            <lightning-input-field field-name="Inactive__c">
+            </lightning-input-field>
+            <!--<lightning-input-field field-name="Module__c" disabled={readOnly}>
+            </lightning-input-field>-->
+            <lightning-input-field field-name="Description__c">
+            </lightning-input-field><br/>
+                
+                <lightning-button class="slds-m-top_small" type="submit" label="Update">
+                </lightning-button>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>

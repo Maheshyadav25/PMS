@@ -1,0 +1,16 @@
+<aura:component controller= "lwcCustomLookupController" implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader">
+	<aura:attribute name="title" type="String" default="Task"/>
+    <aura:attribute name="resources" type = "Object[]" />
+    <lightning:card>
+        <aura:set attribute="title">
+            <lightning:icon iconName="standard:user" size="small"/>
+            &nbsp; &nbsp; {! v.title }
+        </aura:set>
+        <aura:set attribute="footer">
+            <div class="slds-no-flex">
+        		<lightning:button label="Submit Resources" title="Brand action" onclick="{! c.handleClick }" />
+      		</div>
+        </aura:set>
+        <c:lwcAddResources onselected="{!c.handleSelection}" ></c:lwcAddResources>
+    </lightning:card>
+</aura:component>

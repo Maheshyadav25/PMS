@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:html tag="style">
+    .slds-modal__container {
+     min-width: 90vw;
+    }
+</aura:html>  
+    <c:lwcCreateMultipleTask getIdFromParent="{!v.recordId}" getApiName="Task_PM__c" areTaskVisible="true" onclosemodel="{!c.closeAction}"/>	
+</aura:component>

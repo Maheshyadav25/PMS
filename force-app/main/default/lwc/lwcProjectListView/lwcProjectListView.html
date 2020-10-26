@@ -1,0 +1,47 @@
+<template>
+    <lightning-card  variant="Narrow"  icon-name="custom:custom16">
+        <div slot="title">
+            <h3>Projects</h3>
+            <p>Our Projects</p>
+        </div>
+        <div slot="actions">
+            <template if:true = {isCreateable}>
+                <lightning-button label="New Project" onclick={createNewProject} slot="actions"></lightning-button>    
+            </template>
+            <lightning-button-icon  icon-name="utility:refresh" onclick={refreshList} variant="border-filled" alternative-text="Show More" slot="actions"></lightning-button-icon>
+        </div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_6-of-8">
+                
+            </div>
+            <div class="slds-col slds-size_2-of-8">
+                <lightning-input type="search"
+                    placeholder = "Search this list..."
+                    label="Search"
+                    value={searchString}
+                    onkeyup={handleSearch}></lightning-input>        
+            </div>
+        </div>
+
+        
+    
+        <template if:true ={dataList.data}>
+            <lightning-datatable 
+                key-field="id" 
+                data={dataList.data} 
+                columns={columns}
+                hide-checkbox-column="true" 
+                show-row-number-column="true" 
+                onrowaction={handleRowAction}>
+            </lightning-datatable>
+        </template>
+        <template if:true ={dataList.error}>
+            <p>{dataList.error}</p>
+        </template>
+          
+        <p slot="footer"></p>
+    </lightning-card>    
+    
+
+    
+</template>

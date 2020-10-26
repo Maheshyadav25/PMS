@@ -1,0 +1,35 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+            Edit Project
+        </h3>
+        <div slot="footer">
+                
+        </div>
+        <div>
+            <lightning-record-edit-form record-id={recordId} object-api-name={objectApiName} onsuccess={handleSuccess}
+            onerror={handleError} onsubmit={handleSubmit}>
+                <lightning-messages>
+                </lightning-messages>
+                <lightning-input-field field-name="Name">
+                </lightning-input-field>
+                <lightning-input-field field-name="Stage__c">
+                </lightning-input-field>
+                <lightning-input-field field-name="Start_Date__c">
+                </lightning-input-field>
+                <lightning-input-field field-name="End_Date__c">
+                </lightning-input-field>
+                <lightning-input-field field-name="Duration__c">
+                </lightning-input-field>
+                <lightning-input-field field-name="Company__c">
+                </lightning-input-field>
+                <lightning-input-field field-name="Status__c">
+                </lightning-input-field>
+                
+                <lightning-button class="slds-m-top_small" type="submit" label="Update">
+                </lightning-button>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>

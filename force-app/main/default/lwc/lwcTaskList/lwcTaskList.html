@@ -1,0 +1,86 @@
+<template>
+
+    <lightning-card title="Tasks">
+
+        <!--button-->
+        <div class="slds-float_right">
+        <lightning-button-icon icon-name="utility:refresh" variant="border-filled" onclick={refresh} size="medium"
+            alternative-text="refresh" class="slds-m-left_xx-small slds-button_icon slds-button_icon-border">
+        </lightning-button-icon>
+        </div>
+        <div class="slds-var-m-around_medium">
+            <template if:true={tasks}>
+                <div style="height: 300px;">
+                    <lightning-datatable key-field="Id" objectapiname={recordId} data={tasks.data} columns={columns}
+                        hide-checkbox-column="true" show-row-number-column="true" onrowaction={handleRowAction}>
+                    </lightning-datatable>
+
+                </div>
+
+            </template>
+
+            <template if:false={tasks}>
+
+                {error}>
+
+            </template>
+            <!-- showing record edit form -->
+            <template if:true={dShowModal}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- modal header -->
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeModal2}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                    size="small"></lightning-icon>
+                            </button>
+                            <h2 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">Task Edit</h2>
+                        </header>
+                        <!-- modal body -->
+                        <div class="slds-modal__content" id="modal-content-id-4">
+                <lightning-record-edit-form layout-type="Full" record-id={currentRecordId} object-api-name="Task_PM__c" onsubmit={handleSubmit} onsuccess={handleSuccess} onerror={handleError}>
+                    <lightning-input-field field-name="Name">
+                    </lightning-input-field>
+                    <lightning-input-field field-name="Status__c">
+                    </lightning-input-field>
+                    <lightning-input-field field-name="Start_Date__c">
+                    </lightning-input-field>
+                    <lightning-input-field field-name="End_Date__c">
+                    </lightning-input-field>
+                    <lightning-input-field field-name="Module__c" disabled>
+                    </lightning-input-field>
+                    <!--<lightning-input-field field-name="Description__c">
+                    </lightning-input-field>--><br/>
+                    
+                    <div style="text-align:center;">
+                        <lightning-button class="slds-m-top_small"
+                                          variant="brand"
+                                          type="submit"
+                                          name="update"
+                                          label="Update Record"></lightning-button>
+                    </div>
+                </lightning-record-edit-form><br/>
+                <div></div>
+                </div>
+            </div>
+            
+            <!-- modal footer start-->
+            <!--<footer class="slds-modal__footer" if:false={isEditForm}>
+                <lightning-button variant="brand"
+                                  label="Close"
+                                  title="Close"
+                                  onclick={closeModal}></lightning-button>
+            </footer>-->
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+
+            
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

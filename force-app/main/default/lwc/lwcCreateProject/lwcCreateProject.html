@@ -1,0 +1,141 @@
+<template>
+    <lightning-card title="Project Management">
+        
+        <div>
+            <lightning-button variant="brand-outline" label="Create New Project" title="For Creating a Project"
+                onclick={openModal} class="slds-m-left_xx-large"></lightning-button>
+        </div>
+
+        <template if:true={bShowModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- modal header -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                        </button>
+
+
+
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Record Detail</h2>
+                    </header>
+                    <!-- modal body -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning-card>
+
+                            <lightning-layout>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-card title="Create A New Project">
+                                        <lightning-record-edit-form object-api-name="Project__c" onsuccess={successHandler}>
+                                            <div class="stepOne">
+                                                <p>
+                                                    <lightning-input-field field-name='Name'></lightning-input-field>
+                                                </p>
+                                                <p>
+                                                    <lightning-input-field field-name='Category__c'></lightning-input-field>
+                                                </p>
+                                                <p>
+                                                    <lightning-input-field field-name='Status__c'></lightning-input-field>
+                                                </p>
+                                                <p>
+                                                    <lightning-input-field field-name='Start_Date__c'></lightning-input-field>
+                                                </p>
+                    
+                                                <p>
+                                                    <lightning-input-field field-name='Duration__c'></lightning-input-field>
+                                                </p>
+                                                <p>
+                                                    <lightning-input-field field-name='Stage__c'></lightning-input-field>
+                                                </p>
+                                                <p>
+                                                    <lightning-input-field field-name='Company__c'></lightning-input-field>
+                                                </p>
+                                                
+                                                <p>
+                                                    <lightning-button type="submit" variant="brand" name="save" label="Create Project"
+                                                       >
+                                                    </lightning-button>
+                                                </p>
+                                            </div>
+                            
+                                        </lightning-record-edit-form>
+                                    </lightning-card>
+                                </lightning-layout-item>
+                            </lightning-layout>
+
+                        </lightning-card>
+                    </div>
+                    <!-- modal footer start-->
+                    <!-- <footer class="slds-modal__footer">
+                    <lightning-button variant="brand" label="Close" title="Close" onclick={closeModal}>
+                    </lightning-button>
+                </footer>-->
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+
+
+
+        </template>
+        <!-- List of Projects -->
+        <lightning-card title="Projects">
+
+            <div class="slds-m-around_medium">
+
+                <template if:true={projects}>
+                    <div style="height: 300px;">
+                        <lightning-datatable key-field="Id" data={projects.data} columns={columns}
+                            hide-checkbox-column="true" show-row-number-column="true" onrowaction={handleRowAction}>
+                        </lightning-datatable>
+
+                    </div>
+
+                </template>
+
+                <template if:true={error}>
+
+                    {error}>
+
+                </template>
+
+
+            </div>
+        </lightning-card>
+
+
+        <template if:true={cShowModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- modal header -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModal1}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                        </button>
+
+
+
+                        <h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">Modul Creation</h2>
+                    </header>
+                    <!-- modal body -->
+
+                    <div class="slds-modal__content" id="modal-content-id-3">
+                        <c-lwc-create-multiple-task get-id-from-parent={currentRecordId} get-api-name="Module__c"></c-lwc-create-multiple-task>
+
+                    </div>
+                    <!-- modal footer start-->
+                    <!--<footer class="slds-modal__footer">
+                    <lightning-button variant="brand" label="Close" title="Close" onclick={closeModal1}>
+                    </lightning-button>
+                </footer>-->
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

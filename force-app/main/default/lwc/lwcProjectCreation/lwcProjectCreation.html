@@ -1,0 +1,76 @@
+<template>
+    <div class="slds-theme_default">
+           <!-- <section role="dialog" tabindex="-1" aria-labelledby="abc" aria-modal="false" aria-describedby="abc" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Modal Box Example</h2>
+                    </header>-->
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Project</h2>
+                </header><div class="slds-modal__content slds-var-p-around_medium"  style="height:18rem;max-height:18rem;overflow:initial" id="modal-content-id-1">
+                        <template if:true={showProject}>
+                            <h2><b>Select Company</b></h2><br/>
+                            <lightning-combobox 
+                                name="progress"
+                                label="Company "
+                                value={value}
+                                placeholder="Select Company"
+                                options={options}
+                                onchange={handleChange} ></lightning-combobox>
+                            
+                        </template>
+                        <template if:true={showCompetency}>
+                            <h2><b>Select Competencies</b></h2><br/>
+                                <lightning-checkbox-group name="Checkbox Group"
+                                label="Select Competencies"
+                                options={selectCompetencies}
+                                value={competency}
+                                onchange={handleCompetencyChange}></lightning-checkbox-group>
+                            
+                        </template> 
+                        <template if:true={showForm}>
+                            <lightning-record-edit-form object-api-name="Project__c" onerror={handleError} onsuccess={handleProjectCreated} onsubmit={handleSubmit}>
+                                <lightning-messages></lightning-messages>
+                                <lightning-input-field field-name="Name" required>
+                                </lightning-input-field>
+                                <lightning-input-field field-name="Company__c"
+                                                       value={company} required disabled>
+                                </lightning-input-field>
+                                <lightning-input-field field-name="Start_Date__c"
+                                                       required>
+                                </lightning-input-field>
+                                <lightning-input-field field-name="Duration__c"
+                                                       required>
+                                </lightning-input-field>
+                            </br>
+                        <center>
+                                <lightning-button class="slds-m-top_small"
+                                                  type="submit"
+                                                  label="Submit" >
+                                </lightning-button>
+                            </center>        
+                            </lightning-record-edit-form>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer" style="padding:1%">
+                        <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <!--<template if:true=>
+                        <lightning-button label="Save" variant="brand" onclick={saveMethod}></lightning-button>
+                        </template>-->
+                        <template if:false={showForm}>
+                        <lightning-button label="Next" variant="brand" onclick={nextView}></lightning-button>
+                        </template>
+                    </footer>
+            <!--</div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        -->
+      </div>   
+        
+     
+</template>

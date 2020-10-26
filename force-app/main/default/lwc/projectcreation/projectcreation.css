@@ -1,0 +1,11 @@
+.slds-m-right_small{
+    margin-right: 50% !important;
+}
+.slds-float_right{
+    padding-right: 20px !important;
+}
+.slds-modal__container {
+    max-width: 80rem !important;
+    width: 80% !important;
+    
+}
